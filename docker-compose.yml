@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-musicclub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-musicclub_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-musicclub}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-musicclub} -d ${POSTGRES_DB:-musicclub}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "1234:1234"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-musicclub}:${POSTGRES_PASSWORD:-musicclub_secret}@db:5432/${POSTGRES_DB:-musicclub}
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Club</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header (always visible) -->
+    <header>
+      <div class="header-inner">
+        <h1>Music Club</h1>
+        <nav>
+          <button class="nav-btn active" data-view="announcements">Announcements</button>
+          <button class="nav-btn auth-only hidden" data-view="proposals">Song Proposals</button>
+          <button class="nav-btn auth-only hidden" data-view="bookings">Bookings</button>
+          <button class="nav-btn auth-only officer-only hidden" data-view="users">User Management</button>
+        </nav>
+        <div class="header-right">
+          <span id="user-info" class="hidden"></span>
+          <button id="login-btn" class="btn-primary btn-sm">Login</button>
+          <button id="logout-btn" class="btn-secondary btn-sm hidden">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay hidden">
+      <div class="modal card">
+        <h2>Login</h2>
+        <form id="login-form">
+          <label>Username
+            <input type="text" name="username" id="login-username" required>
+          </label>
+          <label>Password
+            <input type="password" name="password" id="login-password" required>
+          </label>
+          <button type="submit" class="btn-primary">Login</button>
+          <p id="login-error" class="error" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="password-reset-modal" class="modal-overlay hidden">
+      <div class="modal card">
+        <h2>Password Change Required</h2>
+        <p>Your administrator requires you to set a new password before continuing.</p>
+        <form id="password-reset-form">
+          <label>Current Password
+            <input type="password" name="old_password" id="reset-old-password" required>
+          </label>
+          <label>New Password <small>(min 8 characters)</small>
+            <input type="password" name="new_password" id="reset-new-password" required minlength="8">
+          </label>
+          <button type="submit" class="btn-primary">Change Password</button>
+          <p id="reset-error" class="error" aria-live="polite"></p>
+          <p id="reset-success" class="success hidden" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="content">
+      <p class="placeholder">Loading announcements…</p>
+    </main>
+
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
