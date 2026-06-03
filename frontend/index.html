@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +9,23 @@
 <body>
   <div id="app">
 
-    <!-- Header (always visible) -->
+    <!-- Header -->
     <header>
       <div class="header-inner">
-        <h1>Music Club</h1>
+        <div class="header-logo">
+          <div class="logo-icon">🎵</div>
+          <h1>Music Club</h1>
+        </div>
         <nav>
-          <button class="nav-btn active" data-view="announcements">Announcements</button>
-          <button class="nav-btn auth-only hidden" data-view="proposals">Song Proposals</button>
-          <button class="nav-btn auth-only hidden" data-view="bookings">Bookings</button>
-          <button class="nav-btn auth-only officer-only hidden" data-view="users">User Management</button>
+          <button class="nav-btn active" data-view="announcements">📢 公告</button>
+          <button class="nav-btn auth-only hidden" data-view="proposals">🎸 歌曲提案</button>
+          <button class="nav-btn auth-only hidden" data-view="bookings">📅 預約場地</button>
+          <button class="nav-btn auth-only officer-only hidden" data-view="users">👥 成員管理</button>
         </nav>
         <div class="header-right">
           <span id="user-info" class="hidden"></span>
-          <button id="login-btn" class="btn-primary btn-sm">Login</button>
-          <button id="logout-btn" class="btn-secondary btn-sm hidden">Logout</button>
+          <button id="login-btn" class="btn-primary btn-sm">登入</button>
+          <button id="logout-btn" class="btn-secondary btn-sm hidden">登出</button>
         </div>
       </div>
     </header>
@@ -30,15 +33,15 @@
     <!-- Login Modal -->
     <div id="login-modal" class="modal-overlay hidden">
       <div class="modal card">
-        <h2>Login</h2>
+        <h2>🎵 歡迎回來</h2>
         <form id="login-form">
-          <label>Username
-            <input type="text" name="username" id="login-username" required>
+          <label>帳號
+            <input type="text" name="username" id="login-username" required placeholder="請輸入帳號">
           </label>
-          <label>Password
-            <input type="password" name="password" id="login-password" required>
+          <label>密碼
+            <input type="password" name="password" id="login-password" required placeholder="請輸入密碼">
           </label>
-          <button type="submit" class="btn-primary">Login</button>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:0.25rem">登入</button>
           <p id="login-error" class="error" aria-live="polite"></p>
         </form>
       </div>
@@ -47,16 +50,16 @@
     <!-- Password Reset Modal -->
     <div id="password-reset-modal" class="modal-overlay hidden">
       <div class="modal card">
-        <h2>Password Change Required</h2>
-        <p>Your administrator requires you to set a new password before continuing.</p>
+        <h2>🔐 設定新密碼</h2>
+        <p>管理員要求您在繼續使用前設定新密碼。</p>
         <form id="password-reset-form">
-          <label>Current Password
-            <input type="password" name="old_password" id="reset-old-password" required>
+          <label>目前密碼
+            <input type="password" name="old_password" id="reset-old-password" required placeholder="請輸入目前密碼">
           </label>
-          <label>New Password <small>(min 8 characters)</small>
-            <input type="password" name="new_password" id="reset-new-password" required minlength="8">
+          <label>新密碼 <small>（至少 8 個字元）</small>
+            <input type="password" name="new_password" id="reset-new-password" required minlength="8" placeholder="請輸入新密碼">
           </label>
-          <button type="submit" class="btn-primary">Change Password</button>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;margin-top:0.25rem">確認變更</button>
           <p id="reset-error" class="error" aria-live="polite"></p>
           <p id="reset-success" class="success hidden" aria-live="polite"></p>
         </form>
@@ -65,7 +68,10 @@
 
     <!-- Main Content -->
     <main id="content">
-      <p class="placeholder">Loading announcements…</p>
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>載入中…</p>
+      </div>
     </main>
 
   </div>

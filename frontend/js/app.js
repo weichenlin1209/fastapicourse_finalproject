@@ -51,7 +51,7 @@ function setAuthenticated(payload) {
   loginBtn.classList.add('hidden');
   logoutBtn.classList.remove('hidden');
   userInfo.classList.remove('hidden');
-  userInfo.textContent = `${currentUser.sub?.slice(0, 8) || 'User'} (${role})`;
+  userInfo.textContent = `${currentUser.sub?.slice(0, 8) || '使用者'} (${role === 'officer' ? '幹部' : '成員'})`;
 
   authOnlyEls.forEach((el) => el.classList.remove('hidden'));
 
@@ -133,7 +133,7 @@ navBtns.forEach((btn) => {
 });
 
 async function navigateTo(view) {
-  content.innerHTML = '<p class="placeholder">Loading…</p>';
+  content.innerHTML = '<div class="loading"><div class="spinner"></div><p>載入中…</p></div>';
 
   try {
     switch (view) {
