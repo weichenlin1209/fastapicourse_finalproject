@@ -65,7 +65,7 @@ export async function render(container) {
         ),
       );
 
-      const canCancel = b.status === 'active' && (isOfficer || b.user_id === currentUser?.id);
+      const canCancel = b.status === 'active' && (isOfficer || b.user_id === currentUser?.sub);
       if (canCancel) {
         card.append(
           h('div', { class: 'actions' },
