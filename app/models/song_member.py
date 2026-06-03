@@ -23,6 +23,11 @@ class SongMember(Base):
         primary_key=True,
     )
     instrument: Mapped[str] = mapped_column(String(100), nullable=False)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, default="approved")
 
     proposal: Mapped["SongProposal"] = relationship(back_populates="members")
     user: Mapped["User"] = relationship(lazy="joined")
+
+    @property
+    def username(self) -> str:
+        return self.user.username

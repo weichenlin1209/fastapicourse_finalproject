@@ -99,6 +99,8 @@ async def enforce_password_change(request: Request, call_next):
 async def startup():
     async with engine.begin() as conn:
         await conn.execute(text("CREATE EXTENSION IF NOT EXISTS btree_gist"))
+        await conn.execute(text("ALTER TABLE song_proposals ADD COLUMN IF NOT EXISTS description TEXT"))
+        await conn.execute(text("ALTER TABLE song_members ADD COLUMN IF NOT EXISTS status VARCHAR(20) NOT NULL DEFAULT 'approved'"))
         await conn.run_sync(Base.metadata.create_all)
 
     # Seed initial officer account if no users exist

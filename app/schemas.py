@@ -86,12 +86,15 @@ class AnnouncementResponse(BaseModel):
 # --- Song Proposal ---
 class SongProposalCreate(BaseModel):
     song_name: str
+    instrument: str | None = None
+    description: str | None = None
 
 
 class SongProposalResponse(BaseModel):
     id: uuid.UUID
     initiator_id: uuid.UUID
     song_name: str
+    description: str | None = None
     created_at: datetime
     members: list["SongMemberResponse"] = []
 
@@ -105,9 +108,15 @@ class SongMemberCreate(BaseModel):
 class SongMemberResponse(BaseModel):
     proposal_id: uuid.UUID
     user_id: uuid.UUID
+    username: str
     instrument: str
+    status: str = "approved"
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class MemberActionRequest(BaseModel):
+    instrument: str | None = None
 
 
 # --- Booking ---

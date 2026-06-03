@@ -749,6 +749,7 @@ textarea { resize: vertical; min-height: 90px; }
   border-top: 1px solid var(--color-border);
   background: rgba(10,10,20,0.6);
   margin-top: 5rem;
+  text-align: center;
 }
 
 .footer-inner {
@@ -756,8 +757,9 @@ textarea { resize: vertical; min-height: 90px; }
   margin: 0 auto;
   padding: 2.5rem var(--spacing);
   display: grid;
-  grid-template-columns: 2fr 1.5fr 1.5fr;
+  grid-template-columns: 2fr 1.5fr;
   gap: 2.5rem;
+  text-align: center;
 }
 
 .footer-logo {
@@ -777,12 +779,14 @@ textarea { resize: vertical; min-height: 90px; }
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
   margin-bottom: 0.85rem;
+  text-align: center;
 }
 
 .footer-col p {
   font-size: 0.83rem;
   color: var(--color-text-muted);
   line-height: 2;
+  text-align: center;
 }
 
 .footer-bottom {
