@@ -1,0 +1,90 @@
+digraph ER {
+    rankdir=LR;
+    bgcolor="#ffffff";
+    node [shape=plaintext, fontname="Arial", fontsize=12];
+    edge [fontname="Arial", fontsize=11];
+
+    // ─── Legend ───
+    subgraph cluster_legend {
+        label="圖例 Legend";
+        fontsize=14;
+        style=dashed;
+        color="#999999";
+        labelloc=t;
+        fontname="Arial";
+
+        legend [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="4">
+                <TR><TD ALIGN="left"><U>username</U></TD><TD> = Primary Key</TD></TR>
+                <TR><TD ALIGN="left"><FONT COLOR="#1a56db">author_id</FONT></TD><TD> = Foreign Key</TD></TR>
+                <TR><TD ALIGN="left"><I>attribute</I></TD><TD> = Optional / Nullable</TD></TR>
+            </TABLE>
+        >];
+    }
+
+    // ─── Entity: users ───
+    users [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+            <TR><TD BGCOLOR="#bfdbfe" COLSPAN="2"><B>users</B></TD></TR>
+            <TR><TD ALIGN="left"><U>id</U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left">username</TD><TD>String(50) UNIQUE</TD></TR>
+            <TR><TD ALIGN="left">password_hash</TD><TD>String(128)</TD></TR>
+            <TR><TD ALIGN="left">role</TD><TD>String(10)</TD></TR>
+            <TR><TD ALIGN="left">requires_pw_change</TD><TD>Boolean</TD></TR>
+            <TR><TD ALIGN="left">created_at</TD><TD>DateTime(tz)</TD></TR>
+        </TABLE>
+    >];
+
+    // ─── Entity: announcements ───
+    announcements [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+            <TR><TD BGCOLOR="#bfdbfe" COLSPAN="2"><B>announcements</B></TD></TR>
+            <TR><TD ALIGN="left"><U>id</U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left"><FONT COLOR="#1a56db">author_id</FONT></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left">title</TD><TD>String(200)</TD></TR>
+            <TR><TD ALIGN="left">content</TD><TD>Text</TD></TR>
+            <TR><TD ALIGN="left">created_at</TD><TD>DateTime(tz)</TD></TR>
+        </TABLE>
+    >];
+
+    // ─── Entity: song_proposals ───
+    song_proposals [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+            <TR><TD BGCOLOR="#bfdbfe" COLSPAN="2"><B>song_proposals</B></TD></TR>
+            <TR><TD ALIGN="left"><U>id</U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left"><FONT COLOR="#1a56db">initiator_id</FONT></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left">song_name</TD><TD>String(200)</TD></TR>
+            <TR><TD ALIGN="left">created_at</TD><TD>DateTime(tz)</TD></TR>
+        </TABLE>
+    >];
+
+    // ─── Entity: song_members (association) ───
+    song_members [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+            <TR><TD BGCOLOR="#fde68a" COLSPAN="2"><B>song_members</B></TD></TR>
+            <TR><TD ALIGN="left"><U><FONT COLOR="#1a56db">proposal_id</FONT></U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left"><U><FONT COLOR="#1a56db">user_id</FONT></U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left">instrument</TD><TD>String(100)</TD></TR>
+        </TABLE>
+    >];
+
+    // ─── Entity: bookings ───
+    bookings [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">
+            <TR><TD BGCOLOR="#bfdbfe" COLSPAN="2"><B>bookings</B></TD></TR>
+            <TR><TD ALIGN="left"><U>id</U></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left"><FONT COLOR="#1a56db">user_id</FONT></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left"><FONT COLOR="#1a56db">proposal_id</FONT></TD><TD>UUID</TD></TR>
+            <TR><TD ALIGN="left">booking_period</TD><TD>TSRANGE</TD></TR>
+            <TR><TD ALIGN="left">status</TD><TD>String(20)</TD></TR>
+        </TABLE>
+    >];
+
+    // ─── Relationships ───
+    users -> announcements [label="1          *", taillabel="", headlabel="", dir=forward];
+    users -> song_proposals [label="1          *"];
+    users -> song_members [label="1          *"];
+    song_proposals -> song_members [label="1          *"];
+    users -> bookings [label="1          *"];
+    song_proposals -> bookings [label="1          *"];
+}
