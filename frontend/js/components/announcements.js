@@ -7,10 +7,18 @@ export function init(user) {
   currentUser = user;
 }
 
+function getAnnouncementMeta(title) {
+  if (title.startsWith('【置頂】')) return { type: 'pinned', label: '📌 置頂', cls: 'badge-pinned' };
+  if (title.startsWith('【重要】')) return { type: 'important', label: '⚠️ 重要', cls: 'badge-important' };
+  if (title.startsWith('【活動】')) return { type: 'event', label: '🎪 活動', cls: 'badge-event' };
+  return null;
+}
+
 export async function render(container) {
   clear(container);
 
   const isOfficer = currentUser?.role === 'officer';
+
   const header = h('div', { class: 'section-header' },
     h('h2', {}, '📢 公告欄'),
   );
@@ -45,12 +53,23 @@ export async function render(container) {
     const list = h('div', { class: 'list' });
 
     for (const item of items) {
-      const card = h('div', { class: 'item-card' },
+      const meta = getAnnouncementMeta(item.title);
+      const cardClasses = ['item-card', meta?.type === 'pinned' ? 'pinned' : ''].filter(Boolean).join(' ');
+
+      const titleRow = h('div', { class: 'ann-title-row' },
         h('h3', {}, item.title),
+      );
+
+      if (meta) {
+        titleRow.prepend(h('span', { class: `badge ${meta.cls} badge-ann` }, meta.label));
+      }
+
+      const card = h('div', { class: cardClasses },
+        titleRow,
         h('div', { class: 'meta' },
           h('span', {}, `🕐 ${formatDate(item.created_at)}`),
         ),
-        h('p', {}, item.content),
+        h('p', { class: 'ann-content' }, item.content),
       );
 
       if (isOfficer) {
@@ -106,9 +125,10 @@ async function showEditForm(container, item) {
 function createForm(item, container) {
   const form = h('div', { class: 'create-form-card' },
     h('h3', {}, item ? '✏️ 編輯公告' : '📝 新增公告'),
+    h('p', { class: 'form-hint' }, '提示：標題可加上 【置頂】、【重要】、【活動】 前綴以顯示對應標記'),
     h('form', {},
       h('label', {}, '標題',
-        h('input', { name: 'title', value: item?.title || '', required: true, placeholder: '公告標題' }),
+        h('input', { name: 'title', value: item?.title || '', required: true, placeholder: '例：【重要】本週社課地點異動' }),
       ),
       h('label', {}, '內容',
         h('textarea', { name: 'content', required: true, placeholder: '公告內容…' }, item?.content || ''),

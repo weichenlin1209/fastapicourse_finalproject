@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Music Club</title>
+  <title>音樂性社團管理系統</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,18 +13,19 @@
     <header>
       <div class="header-inner">
         <div class="header-logo">
-          <div class="logo-icon">🎵</div>
-          <h1>Music Club</h1>
+          <div class="logo-icon">🎻</div>
+          <div class="logo-text">
+            <h1>音樂性社團管理網站</h1>
+          </div>
         </div>
         <nav>
-          <button class="nav-btn active" data-view="announcements">📢 公告</button>
           <button class="nav-btn auth-only hidden" data-view="proposals">🎸 歌曲提案</button>
           <button class="nav-btn auth-only hidden" data-view="bookings">📅 預約場地</button>
           <button class="nav-btn auth-only officer-only hidden" data-view="users">👥 成員管理</button>
         </nav>
         <div class="header-right">
           <span id="user-info" class="hidden"></span>
-          <button id="login-btn" class="btn-primary btn-sm">登入</button>
+          <button id="login-btn" class="btn-primary btn-sm">🔑 登入</button>
           <button id="logout-btn" class="btn-secondary btn-sm hidden">登出</button>
         </div>
       </div>
@@ -74,6 +75,24 @@
       </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div class="footer-logo">🎵 音樂性社團管理網站</div>
+          <p>用音樂連結每一個心靈</p>
+        </div>
+        <div class="footer-col">
+          <h4>社團資訊</h4>
+          <p>📅 社課：每週三 18:00 – 20:00</p>
+          <p>📍 地點：學生活動中心 303 室</p>
+          <p>📧 musicclub@university.edu.tw</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 音樂性社團管理網站</p>
+      </div>
+    </footer>
   </div>
 
   <script type="module" src="js/app.js"></script>

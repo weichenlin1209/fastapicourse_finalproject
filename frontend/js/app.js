@@ -20,6 +20,7 @@ const userInfo     = $('user-info');
 const logoutBtn    = $('logout-btn');
 const navBtns      = document.querySelectorAll('.nav-btn');
 const authOnlyEls  = document.querySelectorAll('.auth-only');
+const headerLogo   = document.querySelector('.header-logo');
 
 let currentUser = null;
 
@@ -78,7 +79,6 @@ function setUnauthenticated() {
   const active = document.querySelector('.nav-btn.active');
   if (active && active.classList.contains('auth-only')) {
     navBtns.forEach((b) => b.classList.remove('active'));
-    document.querySelector('[data-view="announcements"]')?.classList.add('active');
     announcements.render(content);
   }
 }
@@ -121,6 +121,13 @@ loginForm.addEventListener('submit', async (e) => {
 /* ---- Logout ---- */
 logoutBtn.addEventListener('click', () => {
   setUnauthenticated();
+});
+
+/* ---- Logo click → announcements ---- */
+headerLogo.style.cursor = 'pointer';
+headerLogo.addEventListener('click', () => {
+  navBtns.forEach((b) => b.classList.remove('active'));
+  navigateTo('announcements');
 });
 
 /* ---- Navigation ---- */

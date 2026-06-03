@@ -194,6 +194,13 @@ header {
   gap: 0.6rem;
   text-decoration: none;
   flex-shrink: 0;
+  cursor: default;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .header-logo .logo-icon {
@@ -602,6 +609,190 @@ textarea { resize: vertical; min-height: 90px; }
   animation: fadeIn 0.2s ease;
 }
 
+/* ---- Club Info Card ---- */
+.club-info-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.08) 100%);
+  border: 1px solid rgba(124,58,237,0.28);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.club-info-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -30px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.club-info-emblem {
+  font-size: 2.8rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(124,58,237,0.4));
+}
+
+.club-info-main { flex: 1; }
+
+.club-info-main h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
+}
+
+.club-info-main p {
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+}
+
+.club-info-facts {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.club-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.club-fact-label {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+
+.club-fact-value {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* ---- Announcement Title Row ---- */
+.ann-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+
+.ann-title-row h3 { margin-bottom: 0; }
+
+.badge-ann {
+  font-size: 0.68rem;
+  flex-shrink: 0;
+}
+
+.ann-content {
+  white-space: pre-line;
+}
+
+/* ---- Announcement Type Badges ---- */
+.badge-important {
+  background: rgba(251,191,36,0.15);
+  color: var(--color-warning);
+  border: 1px solid rgba(251,191,36,0.35);
+}
+
+.badge-event {
+  background: rgba(6,182,212,0.15);
+  color: var(--color-accent);
+  border: 1px solid rgba(6,182,212,0.35);
+}
+
+.badge-pinned {
+  background: rgba(124,58,237,0.15);
+  color: var(--color-primary-light);
+  border: 1px solid rgba(124,58,237,0.35);
+}
+
+/* ---- Pinned Announcement Card ---- */
+.item-card.pinned {
+  border-color: rgba(124,58,237,0.35);
+  background: linear-gradient(160deg, var(--color-surface), rgba(124,58,237,0.05));
+}
+
+.item-card.pinned::before {
+  opacity: 1;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+/* ---- Form Hint ---- */
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(124,58,237,0.08);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid rgba(124,58,237,0.4);
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background: rgba(10,10,20,0.6);
+  margin-top: 5rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem var(--spacing);
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  gap: 2.5rem;
+}
+
+.footer-logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff, var(--color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.footer-col h4 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.footer-col p {
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  line-height: 2;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--color-border);
+  padding: 1rem var(--spacing);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   .header-inner { gap: 0.5rem; }
@@ -612,4 +803,7 @@ textarea { resize: vertical; min-height: 90px; }
   .item-card { padding: 1rem; }
   .card { padding: 1.25rem; }
   .section-header h2 { font-size: 1.1rem; }
+  .club-info-card { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.25rem; }
+  .club-info-facts { gap: 1rem; }
+  .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
 }
